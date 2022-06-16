@@ -1,0 +1,35 @@
+name: schedule
+
+# for now we trigger this event manually
+on: workflow_dispatch
+#   schedule:
+#     - cron: "0 * * * *"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      TZ: Asia/Shanghai
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.18
+
+      - name: Fetch latest pricing data
+        run: go run main ./seed/main.go
+
+      - name: Push to the remote repo
+        run: |
+          git config --local user.email "bot@bytebase.com"
+          git config --local user.name "bot"
+          git remote set-url origin https://${{ github.actor }}:${{ secrets.ACCESS_TOKEN }}@github.com/${{ github.repository }}
+          git pull --rebase
+          git add .
+          git commit -m "update by github action"
+          git push -f
