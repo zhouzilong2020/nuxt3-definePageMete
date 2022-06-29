@@ -52,19 +52,18 @@
               </div>
 
               <div class="text-xs font-mono">{{ dataRow.region }}</div>
-              <div class="text-xs font-mono">
-                <n-avatar
+              <div class="text-xs font-mono flex">
+                <img
                   color="none"
-                  class="align-top"
                   :src="EngineIcon[dataRow.engineType].src"
-                  :size="16"
+                  width="16"
                 />
 
-                <n-avatar
+                <img
                   color="none"
-                  class="align-top ml-1"
+                  class="ml-1 py-0.5"
                   :src="ProviderIcon[dataRow.cloudProvider].src"
-                  :size="ProviderIcon[dataRow.cloudProvider].size"
+                  width="16"
                 />
               </div>
             </div>
@@ -144,22 +143,20 @@ const emit = defineEmits<{
 
 const ProviderIcon: any = {
   GCP: {
-    src: "../assets/icon/gcp.png",
-    size: 16,
+    src: "./assets/icon/gcp.png",
   },
   AWS: {
-    src: "../assets/icon/aws.png",
-    size: 20,
+    src: "./assets/icon/aws.png",
   },
 };
 
 const EngineIcon: any = {
   MYSQL: {
-    src: "../assets/icon/db-mysql.png",
+    src: "./assets/icon/db-mysql.png",
   },
 
   POSTGRES: {
-    src: "../assets/icon/db-postgres.png",
+    src: "./assets/icon/db-postgres.png",
   },
 };
 </script>

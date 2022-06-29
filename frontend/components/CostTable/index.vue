@@ -38,22 +38,20 @@ const props = defineProps({
 
 const ProviderIconRender = {
   GCP: h(
-    NAvatar,
+    "img",
     {
-      src: "../assets/icon/gcp.png",
-      size: 12,
-      class: "mr-1 pt-0.5",
-      color: "none",
+      src: "./assets/icon/gcp.png",
+      width: 16,
+      class: "mr-1 mb-0.5 inline",
     },
     {}
   ),
   AWS: h(
-    NAvatar,
+    "img",
     {
-      src: "../assets/icon/aws.png",
-      size: 12,
-      class: " mr-1 py-0.5",
-      color: "none",
+      src: "./assets/icon/aws.png",
+      width: 16,
+      class: "mr-1 mb-0.5 inline",
     },
     {}
   ),
@@ -61,22 +59,20 @@ const ProviderIconRender = {
 
 const EngineIconRender = {
   MYSQL: h(
-    NAvatar,
+    "img",
     {
-      src: "../assets/icon/db-mysql.png",
-      size: 16,
-      class: "mt-1",
-      color: "none",
+      src: "./assets/icon/db-mysql.png",
+      width: 16,
+      class: "py-1 inline-block",
     },
     {}
   ),
   POSTGRES: h(
-    NAvatar,
+    "img",
     {
-      src: "../assets/icon/db-postgres.png",
-      size: 16,
-      class: "mt-1",
-      color: "none",
+      src: "./assets/icon/db-postgres.png",
+      width: 16,
+      class: "py-1 inline-block",
     },
     {}
   ),
