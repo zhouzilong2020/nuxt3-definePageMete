@@ -8,7 +8,7 @@
   />
 </template>
 <script setup lang="ts">
-import { NDataTable, NAvatar, NTooltip } from "naive-ui";
+import { NDataTable, NTooltip } from "naive-ui";
 import { PropType, h, computed } from "vue";
 import { getDiff, getDigit } from "@/util";
 import { compareTableCostComparer, dashboardCostComparer } from "./util";
@@ -41,8 +41,7 @@ const ProviderIconRender = {
     "img",
     {
       src: "./assets/icon/gcp.png",
-      width: 16,
-      class: "mr-1 mb-0.5 inline",
+      class: "mr-1 mb-0.5 inline h-2",
     },
     {}
   ),
@@ -50,8 +49,7 @@ const ProviderIconRender = {
     "img",
     {
       src: "./assets/icon/aws.png",
-      width: 16,
-      class: "mr-1 mb-0.5 inline",
+      class: "mr-1 mb-0.5 inline h-2",
     },
     {}
   ),
@@ -62,8 +60,7 @@ const EngineIconRender = {
     "img",
     {
       src: "./assets/icon/db-mysql.png",
-      width: 16,
-      class: "py-1 inline-block",
+      class: "py-1 h-6",
     },
     {}
   ),
@@ -71,8 +68,7 @@ const EngineIconRender = {
     "img",
     {
       src: "./assets/icon/db-postgres.png",
-      width: 16,
-      class: "py-1 inline-block",
+      class: "py-1 h-6",
     },
     {}
   ),
