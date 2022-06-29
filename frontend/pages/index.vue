@@ -74,7 +74,7 @@ import {
   useDataTableItemStore,
 } from "@/stores";
 
-import { isEmptyArray, isConfigChange } from "@/util";
+import { isEmptyArray, isConfigChange, isNeedRefresh } from "@/util";
 import { watch } from "vue";
 
 const dbInstanceStore = useDBInstanceStore();
@@ -211,29 +211,27 @@ watch(
 const notification = useNotification();
 const copyURL = () => {
   // Nuxt: document is only available at the client side (browser)
-  if (process.browser) {
-    navigator.clipboard
-      .writeText(document.location.href)
-      .then(() => {
-        notification.success({
-          content: "Successfully copied to clipboard",
-          duration: 2000,
-        });
-      })
-      .catch(() => {
-        notification.error({
-          content: "Fail to copy, please try again",
-          duration: 2000,
-        });
+  navigator.clipboard
+    .writeText(document.location.href)
+    .then(() => {
+      notification.success({
+        content: "Successfully copied to clipboard",
+        duration: 2000,
       });
-  }
+    })
+    .catch(() => {
+      notification.error({
+        content: "Fail to copy, please try again",
+        duration: 2000,
+      });
+    });
 };
 
 watch(
   config, // ref to searchConfigStore.searchConfig
   (newConfig) => {
     // if any of the following config has changed, we need to update the entire table
-    if (isConfigChange(state.lastConfig, newConfig)) {
+    if (isNeedRefresh(state.lastConfig, newConfig)) {
       // We set the dataRow to empty here for a better animation.
       // Otherwise the loading circle would appear right in the middle of the data table, which may be elusive.
       dataTableItemStore.clearDataRow();

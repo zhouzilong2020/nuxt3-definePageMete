@@ -23,14 +23,17 @@
     <div class="inline-flex float-right items-center space-x-2">
       <div v-is="'script'" async src="https://buttons.github.io/buttons.js" />
       <div class="mt-1">
-        <a
-          class="github-button"
-          href="https://github.com/bytebase/dbcost"
-          data-color-scheme="no-preference: light; light: light; dark: dark;"
-          data-show-count="false"
-          aria-label="Star bytebase/dbcost on GitHub"
-          >Star</a
-        >
+        <client-only>
+          <a
+            class="github-button"
+            href="https://github.com/bytebase/dbcost"
+            data-color-scheme="no-preference: light; light: light; dark: dark;"
+            data-show-count="false"
+            aria-label="Star bytebase/dbcost on GitHub"
+          >
+            Star
+          </a>
+        </client-only>
       </div>
 
       <div class="-mt-0.5 flex items-center">
