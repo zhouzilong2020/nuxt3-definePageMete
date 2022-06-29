@@ -8,10 +8,10 @@
           alt="Bytebase"
         />
       </nuxt-link>
-      <nuxt-link to="/">
+      <nuxt-link to="/provider/aws">
         <span class="h-8 text-lg pt-0.5 text-white"> AWS </span>
       </nuxt-link>
-      <nuxt-link to="/">
+      <nuxt-link to="/provider/gcp">
         <span class="h-8 text-lg pt-0.5 text-white"> GCP </span>
       </nuxt-link>
     </div>

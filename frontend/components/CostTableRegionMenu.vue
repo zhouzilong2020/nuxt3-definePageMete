@@ -31,20 +31,20 @@
           <div class="flex">
             <img
               v-if="
-                region.providerCode.has('AWS') && routeParamProvide.has('AWS')
+                region.providerCode.has('AWS') && routeParamProvider.has('AWS')
               "
               :src="ProviderIcon.AWS"
               width="20"
-              class="py-1 mr-1 items-bottom"
+              class="py-1.5 mr-1 items-bottom"
               style="transform: scale(0.9)"
             />
             <img
               v-if="
-                region.providerCode.has('GCP') && routeParamProvide.has('GCP')
+                region.providerCode.has('GCP') && routeParamProvider.has('GCP')
               "
               :src="ProviderIcon.GCP"
-              width="24"
-              class="p-0.5 items-bottom"
+              width="20"
+              class="py-1 items-bottom"
               style="transform: scale(0.9)"
             />
           </div>
@@ -102,29 +102,31 @@ const emit = defineEmits<{
 }>();
 
 const router = useRouter();
-const routeParamProvide = computed(() =>
-  router.currentRoute.value.params?.provider
-    ? new Set([router.currentRoute.value.params?.provider])
-    : new Set(["GCP", "AWS"])
-);
-const activeAvailableRegionList = computed(
-  (): AvailableRegion[] | undefined => {
-    // all provider is included (AWS, GCP)
-    if (routeParamProvide.value.size === 2) {
-      return props.availableRegionList;
-    }
-    if (routeParamProvide.value.has("AWS")) {
-      return props.availableRegionList.filter((region) =>
-        region.providerCode.has("AWS")
-      );
-    }
-    if (routeParamProvide.value.has("GCP")) {
-      return props.availableRegionList.filter((region) =>
-        region.providerCode.has("GCP")
-      );
-    }
+const routeParamProvider = computed(() => {
+  if (router.currentRoute.value.name === "provider-name") {
+    return new Set([
+      String(router.currentRoute.value.params?.name).toUpperCase(),
+    ]);
   }
-);
+  return new Set(["GCP", "AWS"]);
+});
+const activeAvailableRegionList = computed((): AvailableRegion[] => {
+  // all provider is included (AWS, GCP)
+  if (routeParamProvider.value.size === 2) {
+    return props.availableRegionList;
+  }
+  if (routeParamProvider.value.has("AWS")) {
+    return props.availableRegionList.filter((region) =>
+      region.providerCode.has("AWS")
+    );
+  }
+  if (routeParamProvider.value.has("GCP")) {
+    return props.availableRegionList.filter((region) =>
+      region.providerCode.has("GCP")
+    );
+  }
+  return [];
+});
 
 // "Asia Pacific (Hong Kong)" --->  ["Asia Pacific (Hong Kong", ""] ---> ["Asia Pacific", "Hong Kong"]
 const getParentRegionName = (regionName: string) =>

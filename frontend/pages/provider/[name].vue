@@ -3,7 +3,7 @@
     <h1
       class="flex flex-row justify-center mx-5 mt-4 text-4xl text-center text-slate-800 space-x-2"
     >
-      The Ultimate AWS RDS and Google Cloud SQL Instance Pricing Sheet
+      {{ title }}
     </h1>
 
     <!-- menu -->
@@ -21,7 +21,7 @@
       />
 
       <cost-table-menu
-        :has-provider="true"
+        :has-provider="false"
         :cloud-provider="searchConfigStore.searchConfig.cloudProvider"
         :engine-type="searchConfigStore.searchConfig.engineType"
         :charge-type="searchConfigStore.searchConfig.chargeType"
@@ -103,6 +103,17 @@ const state = reactive<LocalState>({
   lastConfig: { ...searchConfigStore.searchConfig },
 });
 
+const title = computed(() => {
+  const curRoute = router.currentRoute.value;
+  if (curRoute.params.name === "aws") {
+    return `The Ultimate AWS RDS Instance Pricing Sheet`;
+  }
+  if (curRoute.params.name === "gcp") {
+    return `The Ultimate Google Cloud SQL Instance Pricing Sheet`;
+  }
+  router.push({ name: "404" });
+});
+
 const handleUpdateRegion = (val: string[]) => {
   searchConfigStore.searchConfig.region = val;
 };
@@ -161,9 +172,7 @@ watch(
     if (isConfigChange(state.lastConfig, config.value)) {
       const config = searchConfigStore.searchConfig;
       const routeQuery: RouteQueryDashBoard = {
-        provider: isEmptyArray(config.cloudProvider)
-          ? undefined
-          : config.cloudProvider?.join(","),
+        provider: undefined,
         region: isEmptyArray(config.region)
           ? undefined
           : config.region?.join(","),

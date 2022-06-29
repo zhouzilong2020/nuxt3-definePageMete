@@ -135,9 +135,9 @@ const pricingContent = {
     defaultSortOrder: "ascend",
     sorter: {
       compare:
-        router.currentRoute.value.name === "dashboard"
-          ? dashboardCostComparer
-          : compareTableCostComparer,
+        router.currentRoute.value.name === "compare"
+          ? compareTableCostComparer
+          : dashboardCostComparer,
       multiple: 2,
     },
     render: (row: DataRow) =>

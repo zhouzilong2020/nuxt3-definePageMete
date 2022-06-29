@@ -70,11 +70,11 @@ export default defineStore("dbInstance", {
 
   actions: {
     loadDBInstanceList() {
-      console.log("asdasdasd", import.meta.env);
       let sourceFileName = "dbInstance.json";
       if (import.meta.env.MODE === "sample") {
         sourceFileName = "sample.json";
       }
+
       const data = import.meta.glob(`../../data/*.json`);
       for (const path in data) {
         if (path.includes(sourceFileName)) {
