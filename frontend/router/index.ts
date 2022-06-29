@@ -76,7 +76,7 @@ router.beforeEach((to, from, next) => {
       return;
     }
 
-    if (to.name === "provider") {
+    if (to.name === "provider-name") {
       const provider = to.params.provider as string;
       if (!provider || !isValidCloudProvider([provider])) {
         next({ name: "404" });
